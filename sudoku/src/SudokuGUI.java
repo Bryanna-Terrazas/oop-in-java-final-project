@@ -166,6 +166,41 @@ public class SudokuGUI {
         }
     }
 
+    private void showWinDialog() {
+        int result = JOptionPane.showOptionDialog(
+            frame,
+            "Congratulations! You solved the puzzle!",
+            "You Won!",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            new Object[] { "Back to Title" },
+            "Back to Title"
+        );
+    
+        if (result == 0) {
+            cardLayout.show(mainPanel, "Title");
+        }
+    }
+    
+    private void showGameOverDialog() {
+        int result = JOptionPane.showOptionDialog(
+            frame,
+            "Game Over! You're out of lives.",
+            "You Lost!",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.WARNING_MESSAGE,
+            null,
+            new Object[] { "Back to Title" },
+            "Back to Title"
+        );
+    
+        if (result == 0) {
+            cardLayout.show(mainPanel, "Title");
+        }
+    }
+    
+
     public void checkAnswer() {
         if (currentSolution == null) {
             return;
@@ -204,15 +239,20 @@ public class SudokuGUI {
             }
         }
 
-        if (newMistakes > 0) {
+        if(newMistakes > 0) {
             lives -= newMistakes;
             livesLabel.setText("Lives: " + lives);
         }
 
-        if (lives <= 0) {
-            JOptionPane.showMessageDialog(null, "Game Over! You're out of lives.");
+        if(lives <= 0) {
+            showGameOverDialog();
             disableAllCells();
         }
+
+        if(isBoardFullyCorrect()) {
+            showWinDialog();
+        }
+
     }
 
     public void disableAllCells() {
@@ -222,6 +262,26 @@ public class SudokuGUI {
             }
         }
     }
+
+    private boolean isBoardFullyCorrect() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (!isUserEditable[row][col]) continue;
+                String text = cells[row][col].getText().trim();
+                if (text.isEmpty()) return false;
+                try {
+                    int value = Integer.parseInt(text);
+                    if (value != currentSolution[row][col]) {
+                        return false;
+                    }
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
 
     public static class DigitFilter extends DocumentFilter {
         @Override
