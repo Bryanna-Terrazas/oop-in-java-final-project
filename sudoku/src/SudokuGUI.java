@@ -132,7 +132,7 @@ public class SudokuGUI {
         clearBoard();
         int[][] puzzle = currentLevel.getPuzzle();
         currentSolution = currentLevel.getSolution();
-        currentLevel.setLevel();
+        currentLevel.setPuzzle();
     
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {

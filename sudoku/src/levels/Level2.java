@@ -2,7 +2,7 @@ package levels;
 
 public class Level2 implements Level{
    //med lvl
-    // 5 given
+    // 20 given
     private final int[][] solution = {
         
         {8,5,9,3,1,6,4,2,7},
@@ -31,10 +31,10 @@ public class Level2 implements Level{
 
     private final int[][] puzzle = new int[9][9];
 
-    private static final int[][] GIVENS = {{0,1}, {1,3}, {2,5}, {3,7}, {4,0},{8,8}};
+    private static final int[][] GIVENS = {{0,1}, {1,3}, {2,5}, {3,7}, {4,0},{8,8},{5,3},{0,6},{7,3},{1,0},{0,4},{6,8},{5,5},{6,4},{7,0}, {3,3}, {4,4},{6,6}, {5,7}, {2,2,}};
 
     @Override
-    public void setLevel() {
+    public void setPuzzle() {
         for (int i = 0; i < GIVENS.length; i++) {
             int[] cell = GIVENS[i];
             int row = cell[0];
