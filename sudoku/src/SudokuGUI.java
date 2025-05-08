@@ -153,7 +153,7 @@ public class SudokuGUI {
     
 
     public void clearBoard() {
-        lives = 3;
+        lives = 5;
         livesLabel.setText("Lives: " + lives);
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
